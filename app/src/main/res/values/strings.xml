@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Android Ui Testing</string>
+    <string name="text_next">Next</string>
+    <string name="text_start">Start</string>
+    <string name="text_next_fragment">Next fragment</string>
+    <string name="text_next_activity">Next Activity</string>
+    <string name="text_secondary_fragment">This is Secondary Fragment</string>
+    <string name="text_mainactivity">MainActivity</string>
+    <string name="text_back">Back</string>
+    <string name="text_secondaryactivity">SecondaryActivity</string>
+
+    <string name="button_main">Send</string>
+    <string name="editText_main">Enter Your Message Here</string>
+    <string name="text_header">Message Received</string>
+    <string name="button_second">Reply</string>
+    <string name="editText_second">Enter Your Reply Here</string>
+    <string name="text_header_reply">Reply Received</string>
+</resources>
