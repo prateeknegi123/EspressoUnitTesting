@@ -2,55 +2,66 @@ package com.example.androiduitesting
 
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
-    private var mSpinnerLabel = ""
+
+    private var mScore1 = 0
+    private var mScore2 = 0
+
+    companion object {
+        const val STATE_SCORE_1 = "Team 1 Score"
+        const val STATE_SCORE_2 = "Team 2 Score"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        label_spinner.onItemSelectedListener = this
+        if (savedInstanceState != null) {
+            mScore1 = savedInstanceState.getInt(STATE_SCORE_1)
+            mScore2 = savedInstanceState.getInt(STATE_SCORE_2)
 
-        // Create ArrayAdapter using the string array and default
-        // spinner layout.
-
-        // Create ArrayAdapter using the string array and default
-        // spinner layout.
-        val adapter = ArrayAdapter.createFromResource(
-            this, R.array.labels_array,
-            android.R.layout.simple_spinner_item
-        )
-        // Specify the layout to use when the list of choices appears.
-        // Specify the layout to use when the list of choices appears.
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        label_spinner.adapter = adapter
+            score_1.text = mScore1.toString()
+            score_2.text = mScore2.toString()
+        }
     }
 
-    fun showText(view: View) {
-        val showString: String = editText_main.getText().toString().toString() +
-                " - " + mSpinnerLabel
-        // Display a Toast message with showString
-        // Display a Toast message with showString
-        Toast.makeText(this, showString, Toast.LENGTH_SHORT).show()
-        // Set the TextView to showString.
-        // Set the TextView to showString.
-        text_phonelabel.setText(showString)
+    fun decreaseScore(view: View) {
+        val viewID = view.id
+        when(viewID){
+            R.id.decreaseTeam1->{
+                mScore1--
+                score_1.text = mScore1.toString()
+            }
+
+            R.id.decreaseTeam2->{
+                mScore2--;
+                score_2.text = mScore2.toString()
+            }
+        }
     }
 
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-
+    fun increaseScore(view: View) {
+        when(view.id){
+            R.id.increaseTeam1->{
+                mScore1++;
+                score_1.text = mScore1.toString()
+            }
+            R.id.increaseTeam2->{
+                mScore2++;
+                score_2.text = mScore2.toString()
+            }
+        }
     }
 
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        mSpinnerLabel = p0!!.getItemAtPosition(p2).toString();
-        showText(p1!!)
+    override fun onSaveInstanceState(outState: Bundle) {
+        // Save the scores.
+        outState.putInt(STATE_SCORE_1, mScore1)
+        outState.putInt(STATE_SCORE_2, mScore2)
+        super.onSaveInstanceState(outState)
     }
 }
