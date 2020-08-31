@@ -2,55 +2,45 @@ package com.example.androiduitesting
 
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.view.*
+import java.util.*
 
 
-class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
-
-    private var mSpinnerLabel = ""
+class MainActivity : AppCompatActivity() {
+    private val mWordList: LinkedList<String> = LinkedList()
+    private val mainAdapter = MainAddapter(mWordList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        label_spinner.onItemSelectedListener = this
+        for (i in 0..19) {
+            mWordList.addLast("Word $i")
+        }
 
-        // Create ArrayAdapter using the string array and default
-        // spinner layout.
+        fab.setOnClickListener {
+            val wordListSize = mWordList.size
+            // Add a new word to the wordList.
+            mWordList.addLast("+ Word $wordListSize")
+            // Notify the adapter, that the data has changed.
+            content.recyclerview.adapter!!.notifyItemInserted(wordListSize)
+            // Scroll to the bottom.
+            content.recyclerview.smoothScrollToPosition(wordListSize)
+        }
 
-        // Create ArrayAdapter using the string array and default
-        // spinner layout.
-        val adapter = ArrayAdapter.createFromResource(
-            this, R.array.labels_array,
-            android.R.layout.simple_spinner_item
-        )
-        // Specify the layout to use when the list of choices appears.
-        // Specify the layout to use when the list of choices appears.
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        label_spinner.adapter = adapter
+        setRecyclerView()
     }
 
-    fun showText(view: View) {
-        val showString: String = editText_main.getText().toString().toString() +
-                " - " + mSpinnerLabel
-        // Display a Toast message with showString
-        // Display a Toast message with showString
-        Toast.makeText(this, showString, Toast.LENGTH_SHORT).show()
-        // Set the TextView to showString.
-        // Set the TextView to showString.
-        text_phonelabel.setText(showString)
-    }
+    private fun setRecyclerView() {
 
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-
-    }
-
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        mSpinnerLabel = p0!!.getItemAtPosition(p2).toString();
-        showText(p1!!)
+        content.recyclerview.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = mainAdapter
+        }
     }
 }
+
+
