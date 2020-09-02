@@ -21,6 +21,10 @@
     <string name="phonenumber_label">Phone Number:</string>
     <string name="nothing_entered">Nothing entered</string>
 
+    <string name="hint_word">Word...</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Word not saved because it is empty.</string>
+
     <string-array name="labels_array">
         <item>Home</item>
         <item>Work</item>
