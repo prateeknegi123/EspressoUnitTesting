@@ -1,72 +1,79 @@
 package com.example.androiduitesting
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.NotificationCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
 
-
-    private var mScore1 = 0
-    private var mScore2 = 0
-
     companion object {
-        const val STATE_SCORE_1 = "Team 1 Score"
-        const val STATE_SCORE_2 = "Team 2 Score"
+        private val PRIMARY_CHANNEL_ID: String = "primary_notification_channel"
+        private val NOTIFICATION_ID: Int = 0
     }
+
+    private lateinit var mNotifyManager: NotificationManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState != null) {
-            mScore1 = savedInstanceState.getInt(STATE_SCORE_1)
-            mScore2 = savedInstanceState.getInt(STATE_SCORE_2)
+        createNotificationChannel()
+        notify.setOnClickListener {
+            sendNotification()
+        }
 
-            score_1.text = mScore1.toString()
-            score_2.text = mScore2.toString()
+    }
+
+    private fun createNotificationChannel() {
+        mNotifyManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(
+                PRIMARY_CHANNEL_ID, "Mascot Notification", NotificationManager
+                    .IMPORTANCE_HIGH
+            )
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.BLUE
+            notificationChannel.enableVibration(true)
+            notificationChannel.description = "Notification from Mascot"
+            mNotifyManager.createNotificationChannel(notificationChannel)
         }
     }
 
-    fun decreaseScore(view: View) {
-        val viewID = view.id
-        when (viewID) {
-            R.id.decreaseTeam1 -> {
-                mScore1--
-                score_1.text = mScore1.toString()
-            }
 
-            R.id.decreaseTeam2 -> {
-                mScore2--;
-                score_2.text = mScore2.toString()
-            }
-        }
+    private fun sendNotification() {
+        val notifyBuilder = getNotificationBuilder()
+        mNotifyManager.notify(
+            NOTIFICATION_ID, notifyBuilder.build()
+        )
     }
 
-    fun increaseScore(view: View) {
-        when (view.id) {
-            R.id.increaseTeam1 -> {
-                mScore1++;
-                score_1.text = mScore1.toString()
-            }
-            R.id.increaseTeam2 -> {
-                mScore2++;
-                score_2.text = mScore2.toString()
-            }
-        }
+    private fun getNotificationBuilder(): NotificationCompat.Builder {
+        return NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
+            .setContentTitle("You've been notified!")
+            .setContentText("This is your notification text.")
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentIntent(pendingIntent())
+            .setAutoCancel(true)
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        // Save the scores.
-
-        outState.putInt(STATE_SCORE_1, mScore1)
-        outState.putInt(STATE_SCORE_2, mScore2)
-        super.onSaveInstanceState(outState)
+    private fun pendingIntent(): PendingIntent {
+        val notificationIntent = Intent(this, MainActivity::class.java)
+        return PendingIntent.getActivity(
+            this,
+            NOTIFICATION_ID,
+            notificationIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
