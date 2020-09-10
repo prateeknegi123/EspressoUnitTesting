@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -12,9 +12,94 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Notify Me!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/update"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Me!"
+        app:layout_constraintBottom_toTopOf="@+id/cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notify" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel Me!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/update" />
+
+
+    <!--    <com.google.android.material.card.MaterialCardView-->
+    <!--      -->
+    <!--        android:layout_width="120dp"-->
+    <!--        android:layout_height="120dp"-->
+    <!--     -->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+
+    <!--      <ImageView
+              android:id="@+id/img1"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:scaleType="fitXY"
+              android:src="@drawable/ic_place_holder" />-->
+    <!--    </ com.google.android.material.card.MaterialCardView>-->
+
+
+    <!--<com.joooonho.SelectableRoundedImageView
+
+        android:id="@+id/image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_place_holder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sriv_border_color="#008fea"
+        app:sriv_border_width="2dip"
+        app:sriv_left_bottom_corner_radius="0dp"
+        app:sriv_left_top_corner_radius="48dp"
+        app:sriv_oval="false"
+        app:sriv_right_bottom_corner_radius="48dp"
+        app:sriv_right_top_corner_radius="0dp" />-->
+
+    <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:siShape="@drawable/shape_rounded_rectangle"
+        android:src="@drawable/ic_place_holder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:siSquare="true"/>
+
+    <!-- <com.google.android.material.card.MaterialCardView
+         style="@style/CustomCardViewStyle"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:clipToPadding="true"
+
+         app:cardBackgroundColor="@android:color/transparent"
+        app:cardPreventCornerOverlap="false"
+         app:layout_constraintStart_toStartOf="parent"
+         android:theme="@style/Theme.MaterialComponents.Light"
+         app:layout_constraintTop_toTopOf="parent">
+
+         <ImageView
+             android:id="@+id/img1"
+             android:layout_width="120dp"
+             android:layout_height="120dp"
+             android:scaleType="fitXY"
+             android:src="@drawable/ic_place_holder" />
+
+     </com.google.android.material.card.MaterialCardView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
