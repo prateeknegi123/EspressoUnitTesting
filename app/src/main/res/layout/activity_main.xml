@@ -1,105 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/notify"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notify Me!"
-        app:layout_constraintBottom_toTopOf="@+id/update"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_margin="4dp"
 
-    <Button
-        android:id="@+id/update"
+        android:text="Network Type Required: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+
+    <RadioGroup
+        android:id="@+id/networkOptions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update Me!"
-        app:layout_constraintBottom_toTopOf="@+id/cancel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notify" />
+        android:layout_margin="@dimen/view_margin"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/cancel"
+        <RadioButton
+            android:id="@+id/noNetwork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/none" />
+
+        <RadioButton
+            android:id="@+id/anyNetwork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/any" />
+
+        <RadioButton
+            android:id="@+id/wifiNetwork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wifi" />
+    </RadioGroup>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel Me!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/update" />
+        android:layout_margin="@dimen/view_margin"
+        android:text="@string/requires"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:orientation="horizontal">
 
-    <!--    <com.google.android.material.card.MaterialCardView-->
-    <!--      -->
-    <!--        android:layout_width="120dp"-->
-    <!--        android:layout_height="120dp"-->
-    <!--     -->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
+        <Switch
+            android:id="@+id/idleSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/view_margin"
+            android:text="@string/device_idle" />
 
+        <Switch
+            android:id="@+id/chargingSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/view_margin"
+            android:text="@string/device_charging" />
+    </LinearLayout>
 
-    <!--      <ImageView
-              android:id="@+id/img1"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:scaleType="fitXY"
-              android:src="@drawable/ic_place_holder" />-->
-    <!--    </ com.google.android.material.card.MaterialCardView>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/view_margin"
+        android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/seekBarLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/override_deadline"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
-    <!--<com.joooonho.SelectableRoundedImageView
+        <TextView
+            android:id="@+id/seekBarProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_set"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+    </LinearLayout>
 
-        android:id="@+id/image"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_place_holder"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:sriv_border_color="#008fea"
-        app:sriv_border_width="2dip"
-        app:sriv_left_bottom_corner_radius="0dp"
-        app:sriv_left_top_corner_radius="48dp"
-        app:sriv_oval="false"
-        app:sriv_right_bottom_corner_radius="48dp"
-        app:sriv_right_top_corner_radius="0dp" />-->
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/view_margin" />
 
-    <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:siShape="@drawable/shape_rounded_rectangle"
-        android:src="@drawable/ic_place_holder"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:siSquare="true"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/view_margin"
+        android:onClick="scheduleJob"
+        android:text="@string/schedule_job" />
 
-    <!-- <com.google.android.material.card.MaterialCardView
-         style="@style/CustomCardViewStyle"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:clipToPadding="true"
-
-         app:cardBackgroundColor="@android:color/transparent"
-        app:cardPreventCornerOverlap="false"
-         app:layout_constraintStart_toStartOf="parent"
-         android:theme="@style/Theme.MaterialComponents.Light"
-         app:layout_constraintTop_toTopOf="parent">
-
-         <ImageView
-             android:id="@+id/img1"
-             android:layout_width="120dp"
-             android:layout_height="120dp"
-             android:scaleType="fitXY"
-             android:src="@drawable/ic_place_holder" />
-
-     </com.google.android.material.card.MaterialCardView>-->
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/view_margin"
+        android:onClick="cancelJobs"
+        android:text="@string/cancel_jobs" />
+</LinearLayout>
